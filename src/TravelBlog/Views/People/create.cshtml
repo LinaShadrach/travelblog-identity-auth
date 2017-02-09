@@ -1,4 +1,5 @@
 ﻿@model TravelBlog.Models.Person
+@using TravelBlog.Models
 
 
 <h2>Create</h2>
@@ -14,6 +15,12 @@
 
     @Html.LabelFor(model => model.PersonImage)
     @Html.EditorFor(model => model.PersonImage)
+
+    @Html.LabelFor(model => model.LocationId)
+    @Html.DropDownList("LocationId")
+
+    @Html.LabelFor(model => model.ExperienceId)
+    @Html.DropDownList("ExperienceId")
     <input type="submit" value="Add new person" />
 }
 <p>@Html.ActionLink("Back to list", "Index")</p>
