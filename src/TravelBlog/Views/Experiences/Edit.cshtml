@@ -17,6 +17,9 @@
     @Html.LabelFor(model => model.ExperienceDescription)
     @Html.EditorFor(model => model.ExperienceDescription)
 
+    @Html.LabelFor(model => model.LocationId)
+    @Html.DropDownList("LocationId")
+
     <input type="submit" value="Save" />
 }
 <p>@Html.ActionLink("Back to list", "Index")</p>

@@ -36,9 +36,9 @@ namespace TravelBlog.Controllers
         public IActionResult Details(int id)
         {
             var thisLocation = db.Locations
+                .Include(locations => locations.Experiences)
                 .FirstOrDefault(locations => locations.LocationId == id);
-            var happenings = db.Experiences
-                .Where(experiences => experiences.ExperienceId == thisLocation.ExperienceId).ToList();
+            var happenings = thisLocation.Experiences.ToList();
        
             ViewBag.MyList =  happenings;
             foreach(Experience thing in happenings)

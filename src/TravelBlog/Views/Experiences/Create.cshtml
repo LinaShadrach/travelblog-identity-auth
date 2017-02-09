@@ -16,8 +16,8 @@
     @Html.LabelFor(model => model.ExperienceImage)
     @Html.TextBoxFor(model => model.ExperienceImage)
 
-    @Html.Label("LocationName")
-    @Html.DropDownList("MyList")
+    @Html.LabelFor(model => model.LocationId)
+    @Html.DropDownList("LocationId")
     <input type="submit" value="Add new experience" />
 }
 <p>@Html.ActionLink("Back to list", "Index")</p>

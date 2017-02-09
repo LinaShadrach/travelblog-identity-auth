@@ -27,7 +27,7 @@ namespace TravelBlog.Migrations
 
                     b.Property<string>("ExperienceName");
 
-                    b.Property<int?>("LocationId");
+                    b.Property<int>("LocationId");
 
                     b.Property<int>("PersonId");
 
@@ -42,8 +42,6 @@ namespace TravelBlog.Migrations
                 {
                     b.Property<int>("LocationId")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ExperienceId");
 
                     b.Property<string>("LocationDescription");
 
@@ -86,7 +84,8 @@ namespace TravelBlog.Migrations
                 {
                     b.HasOne("TravelBlog.Models.Location", "Location")
                         .WithMany("Experiences")
-                        .HasForeignKey("LocationId");
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("TravelBlog.Models.Person", b =>

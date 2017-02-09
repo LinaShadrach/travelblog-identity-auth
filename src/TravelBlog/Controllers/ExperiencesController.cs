@@ -21,28 +21,33 @@ namespace TravelBlog.Controllers
 
         public IActionResult Create()
         {
-            ViewBag.MyList = new SelectList(db.Locations, "LocationId", "LocationName");
-            Console.WriteLine(db.Locations.ToList()[0].LocationName);
+            ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "LocationName");
+            
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Experience experience)
+        public IActionResult Create(Experience experience )
         {
+         
             db.Experiences.Add(experience);
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public IActionResult Details(int id)
         {
-            var thisExperience = db.Experiences.FirstOrDefault(experience => experience.ExperienceId == id);
+            var thisExperience = db.Experiences
+                .Include(experiences => experiences.Location)
+                .FirstOrDefault(experience => experience.ExperienceId == id);
             return View(thisExperience);
         }
 
         public IActionResult Edit(int id)
         {
             var thisExperience = db.Experiences.FirstOrDefault(experience => experience.ExperienceId == id);
+            ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "LocationName");
             return View(thisExperience);
         }
 
