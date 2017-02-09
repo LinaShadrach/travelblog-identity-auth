@@ -1,10 +1,16 @@
 ﻿@model TravelBlog.Models.Location
 
-<h2>Are you sure you want to delete this location?</h2>
-<hr />
-@Html.DisplayFor(model => model.LocationName)
-@using (Html.BeginForm())
-{
-    <input type="submit" value="Delete" />
+@{
+    ViewData["Title"] = "Travel Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@Html.ActionLink("Back to List", "Index", "Location")
+<div class="list-card">
+    <h3>Are you sure you want to delete this location?</h3>
+    <hr />
+    @Html.DisplayFor(model => model.LocationName)
+    @using (Html.BeginForm())
+    {
+        <input type="submit" value="Delete" class="btn btn-default" />
+    }
+    @Html.ActionLink("Back to List", "Index", "Location")
+</div>

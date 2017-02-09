@@ -1,26 +1,37 @@
 ﻿@model TravelBlog.Models.Experience
 
+@{
+    ViewData["Title"] = "Travel Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 <h2>Edit</h2>
 <hr />
-<h4>Edit this experience: @Html.DisplayFor(model => model.ExperienceName)</h4>
+<div class="list-card">
+    <h3>Edit this experience: @Html.DisplayFor(model => model.ExperienceName)</h3>
 
-@using (Html.BeginForm())
-{
-    @Html.HiddenFor(model => model.ExperienceId)
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.ExperienceId)
 
-    @Html.LabelFor(model => model.ExperienceImage)
-    @Html.EditorFor(model => model.ExperienceImage)
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExperienceImage, ViewData["attributes"])<br />
+            @Html.EditorFor(model => model.ExperienceImage, new { attributes = new { @class = "form-control" } })
+        </div>
 
-    @Html.LabelFor(model => model.ExperienceName)
-    @Html.EditorFor(model => model.ExperienceName)
-
-    @Html.LabelFor(model => model.ExperienceDescription)
-    @Html.EditorFor(model => model.ExperienceDescription)
-
-    @Html.LabelFor(model => model.LocationId)
-    @Html.DropDownList("LocationId")
-
-    <input type="submit" value="Save" />
-}
-<p>@Html.ActionLink("Back to list", "Index")</p>
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExperienceName, ViewData["attributes"])<br />
+            @Html.EditorFor(model => model.ExperienceName, new { attributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExperienceDescription, ViewData["attributes"])<br />
+            @Html.EditorFor(model => model.ExperienceDescription, new { attributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.LocationId)<br />
+            @Html.DropDownList("LocationId")
+        </div>
+        <input type="submit" value="Save" />
+    }
+        <p>@Html.ActionLink("Back to list", "Index")</p>
+</div>

@@ -1,15 +1,19 @@
 ﻿@model IEnumerable<TravelBlog.Models.Experience>
-
+@{
+    ViewData["Title"] = "Travel Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 <h2>Experiences I had</h2>
 <ul>
     @foreach (var experience in Model)
     {
-        <li>In: @Html.DisplayFor(modelExperience => experience.Location.LocationName)<br />
+        <li class="list-card">In: @Html.DisplayFor(modelExperience => experience.Location.LocationName)<br />
             @Html.DisplayFor(modelExperience => experience.ExperienceName) | @Html.ActionLink("Details", "Details", new { id = experience.ExperienceId }) | @Html.ActionLink("Edit", "Edit", new { id = experience.ExperienceId }) | @Html.ActionLink("Delete", "Delete", new { id = experience.ExperienceId })<br />
         @Html.DisplayFor(modelExperience => experience.ExperienceDescription) <br />
             
     </li>
     }
 </ul>
-
-<p>@Html.ActionLink("Add new experience", "Create")</p>
+<div class="list-card">
+<p >@Html.ActionLink("Add new experience", "Create")</p>
+</div>

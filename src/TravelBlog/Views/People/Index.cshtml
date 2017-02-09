@@ -1,10 +1,14 @@
 ﻿@model IEnumerable<TravelBlog.Models.Person>
 
+@{
+    ViewData["Title"] = "Travel Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 <h2>People I've met</h2>
 <ul>
     @foreach (var person in Model)
     {
-        <li>
+        <li class="list-card">
             @Html.DisplayFor(modelPerson => person.PersonName) <br />
         @Html.DisplayFor(modelPerson => person.PersonDescription) | @Html.ActionLink("Details", "Details", new { id = person.PersonId }) | @Html.ActionLink("Edit", "Edit", new { id = person.PersonId }) | @Html.ActionLink("Delete", "Delete", new { id = person.PersonId })<br />
     </li>

@@ -1,29 +1,40 @@
 ﻿@model TravelBlog.Models.Person
 
+@{
+    ViewData["Title"] = "Travel Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 <h2>Edit</h2>
 <hr />
-<h4>Edit this person: @Html.DisplayFor(model => model.PersonName)</h4>
+<div class="list-card form-group">
+    <h4>Edit this person: @Html.DisplayFor(model => model.PersonName)</h4>
 
-@using (Html.BeginForm())
-{
-    @Html.HiddenFor(model => model.PersonId)
-
-    @Html.LabelFor(model => model.PersonName)
-    @Html.EditorFor(model => model.PersonName)
-
-    @Html.LabelFor(model => model.PersonDescription)
-    @Html.EditorFor(model => model.PersonDescription)
-
-    @Html.LabelFor(model => model.PersonImage)
-    @Html.EditorFor(model => model.PersonImage)
-
-    @Html.LabelFor(model => model.LocationId)
-    @Html.DropDownList("LocationId")
-
-    @Html.LabelFor(model => model.ExperienceId)
-    @Html.DropDownList("ExperienceId")
-
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.PersonId)
+     <div class="form-group">
+        @Html.LabelFor(model => model.PersonName)
+        @Html.EditorFor(model => model.PersonName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.PersonDescription)
+        @Html.EditorFor(model => model.PersonDescription)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.PersonImage)
+        @Html.EditorFor(model => model.PersonImage)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.LocationId)
+        @Html.DropDownList("LocationId")
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ExperienceId)
+        @Html.DropDownList("ExperienceId")
+     </div>
     <input type="submit" value="Save" />
-}
-<p>@Html.ActionLink("Back to list", "Index")</p>
+    }
+    <p>@Html.ActionLink("Back to list", "Index")</p>
+</div>
 

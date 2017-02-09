@@ -1,15 +1,16 @@
 ﻿@model TravelBlog.Models.Location
 @using TravelBlog.Models
 
-
-
-
-
-
+@{
+    ViewData["Title"] = "Travel Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 <h2>Location details</h2>
 <hr />
+<div class="list-card">
 <img src="@Html.DisplayFor(model => model.LocationImage)" /><br />
+
 
 @Html.DisplayFor(model => model.LocationName)<br />
 @Html.DisplayFor(model => model.LocationDescription)
@@ -22,3 +23,5 @@
 
 
 <p>@Html.ActionLink("Back to list", "Index")</p>
+
+</div>

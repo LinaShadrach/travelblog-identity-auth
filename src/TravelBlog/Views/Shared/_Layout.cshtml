@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    
+    <link href="~/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/styles.css"  type="text/css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                   @Html.ActionLink("Locations", "Index", "Locations")
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Experiences", "Index", "Experiences")
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("People", "Index", "People")
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div>
+        
+        @RenderBody()
+    </div>
+</body>
+</html>

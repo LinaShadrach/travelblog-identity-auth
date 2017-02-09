@@ -1,23 +1,32 @@
 ﻿@model TravelBlog.Models.Location
 
+@{
+    ViewData["Title"] = "Travel Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
     <h2>Edit</h2>
     <hr />
-    <h4>Edit this task: @Html.DisplayFor(model => model.LocationName)</h4>
-
+<div class="list-card form-group">
+    <h3>Edit: @Html.DisplayFor(model => model.LocationName)</h3>
     @using (Html.BeginForm())
     {
         @Html.HiddenFor(model => model.LocationId)
+        <div class="form-group">
+            @Html.LabelFor(model => model.LocationImage, ViewData["attributes"])
+            @Html.EditorFor(model => model.LocationImage, new { attributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.LocationName, ViewData["attributes"])
+            @Html.EditorFor(model => model.LocationName, new { attributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group">
 
-        @Html.LabelFor(model => model.LocationImage)
-        @Html.EditorFor(model => model.LocationImage)
-
-        @Html.LabelFor(model => model.LocationName)
-        @Html.EditorFor(model => model.LocationName)
-
-        @Html.LabelFor(model => model.LocationDescription)
-        @Html.EditorFor(model => model.LocationDescription)
-
-        <input type="submit" value="Save" />
-    }
-    <p>@Html.ActionLink("Back to list", "Index")</p>
+            @Html.LabelFor(model => model.LocationDescription, ViewData["attributes"])
+            @Html.EditorFor(model => model.LocationDescription, new { attributes = new { @class = "form-control" } })
+            </div>
+            <input type="submit" value="Save" class="btn btn-default" />
+            }
+            <p>@Html.ActionLink("Back to list", "Index")</p>
+        </div>
 

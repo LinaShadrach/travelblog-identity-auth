@@ -1,11 +1,18 @@
 ﻿@model TravelBlog.Models.Person
 
+@{
+    ViewData["Title"] = "Travel Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 <h2>Person details</h2>
 <hr />
-<img src="@Html.DisplayFor(model => model.PersonImage)" />
-<p>@Html.DisplayFor(model => model.PersonName) </p>
-<p>@Html.DisplayFor(model => model.PersonDescription)</p>
-<p>At: @Html.DisplayFor(model => model.Location.LocationName)</p>
-<p>Experience: @Html.DisplayFor(model => model.Experience.ExperienceName)</p>
+<div class="list-card">
+    <img src="@Html.DisplayFor(model => model.PersonImage)" />
+    <p>@Html.DisplayFor(model => model.PersonName) </p>
+    <p>@Html.DisplayFor(model => model.PersonDescription)</p>
+    <p>At: @Html.DisplayFor(model => model.Location.LocationName)</p>
+    <p>Experience: @Html.DisplayFor(model => model.Experience.ExperienceName)</p>
 
-<p>@Html.ActionLink("Back to list", "Index")</p>
+    <p>@Html.ActionLink("Back to list", "Index")</p>
+</div>
