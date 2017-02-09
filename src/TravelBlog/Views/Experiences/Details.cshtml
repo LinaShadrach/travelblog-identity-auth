@@ -1,0 +1,9 @@
+﻿@model TravelBlog.Models.Experience
+
+<h2>Experience details</h2>
+<hr />
+<img src="@Html.DisplayFor(model => model.ExperienceImage)" /><br />
+@Html.DisplayFor(model => model.ExperienceName)<br />
+@Html.DisplayFor(model => model.ExperienceDescription)
+
+<p>@Html.ActionLink("Back to list", "Index")</p>

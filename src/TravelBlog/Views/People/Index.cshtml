@@ -1,0 +1,14 @@
+﻿@model IEnumerable<TravelBlog.Models.Person>
+
+<h2>People I've met</h2>
+<ul>
+    @foreach (var person in Model)
+    {
+        <li>
+            @Html.DisplayFor(modelPerson => person.PersonName) <br />
+        @Html.DisplayFor(modelPerson => person.PersonDescription) | @Html.ActionLink("Details", "Details", new { id = person.PersonId }) | @Html.ActionLink("Edit", "Edit", new { id = person.PersonId }) | @Html.ActionLink("Delete", "Delete", new { id = person.PersonId })<br />
+    </li>
+    }
+</ul>
+
+<p>@Html.ActionLink("Add new friend", "Create")</p>

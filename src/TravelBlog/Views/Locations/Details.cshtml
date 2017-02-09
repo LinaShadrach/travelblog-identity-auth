@@ -1,0 +1,12 @@
+﻿@model TravelBlog.Models.Location
+
+<h2>Location details</h2>
+<hr />
+<img src="@Html.DisplayFor(model => model.LocationImage)" /><br />
+
+@Html.DisplayFor(model => model.LocationName)<br />
+@Html.DisplayFor(model => model.LocationDescription)
+
+    <p> Experiences:</p>
+    @Html.ListBox("Experience")
+<p>@Html.ActionLink("Back to list", "Index")</p>

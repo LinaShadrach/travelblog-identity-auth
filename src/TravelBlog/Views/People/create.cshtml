@@ -1,0 +1,19 @@
+﻿@model TravelBlog.Models.Person
+
+
+<h2>Create</h2>
+<hr />
+<h4>Add a new Person you've met</h4>
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.PersonName)
+    @Html.TextBoxFor(model => model.PersonName)
+
+    @Html.LabelFor(model => model.PersonDescription)
+    @Html.TextBoxFor(model => model.PersonDescription)
+
+    @Html.LabelFor(model => model.PersonImage)
+    @Html.EditorFor(model => model.PersonImage)
+    <input type="submit" value="Add new person" />
+}
+<p>@Html.ActionLink("Back to list", "Index")</p>

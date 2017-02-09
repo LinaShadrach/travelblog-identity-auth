@@ -1,0 +1,15 @@
+﻿@model IEnumerable<TravelBlog.Models.Location>
+
+<h2>Places I've been</h2>
+<ul>
+    @foreach(var place in Model)
+    {
+        <li>@Html.DisplayFor(modelLocation => place.LocationName) | @Html.ActionLink("Details", "Details", new { id = place.LocationId }) 
+            @Html.ActionLink("Edit", "Edit", new { id = place.LocationId }) | @Html.ActionLink("Delete", "Delete", new { id = place.LocationId })
+    <br />
+
+        @Html.DisplayFor(modelLocation => place.LocationDescription)</li>
+    }
+</ul>
+
+<p>@Html.ActionLink("Add new adventure", "Create")</p>

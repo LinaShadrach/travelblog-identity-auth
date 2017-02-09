@@ -1,0 +1,23 @@
+﻿@model TravelBlog.Models.Experience
+
+<h2>Edit</h2>
+<hr />
+<h4>Edit this experience: @Html.DisplayFor(model => model.ExperienceName)</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.ExperienceId)
+
+    @Html.LabelFor(model => model.ExperienceImage)
+    @Html.EditorFor(model => model.ExperienceImage)
+
+    @Html.LabelFor(model => model.ExperienceName)
+    @Html.EditorFor(model => model.ExperienceName)
+
+    @Html.LabelFor(model => model.ExperienceDescription)
+    @Html.EditorFor(model => model.ExperienceDescription)
+
+    <input type="submit" value="Save" />
+}
+<p>@Html.ActionLink("Back to list", "Index")</p>
+
