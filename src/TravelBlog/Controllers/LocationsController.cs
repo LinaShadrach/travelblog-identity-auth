@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using TravelBlog.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Diagnostics;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -38,7 +39,14 @@ namespace TravelBlog.Controllers
                 .FirstOrDefault(locations => locations.LocationId == id);
             var happenings = db.Experiences
                 .Where(experiences => experiences.ExperienceId == thisLocation.ExperienceId).ToList();
-            ViewBag.Experience = new SelectList(happenings, "ExperienceId", "ExperienceName");
+       
+            ViewBag.MyList =  happenings;
+            foreach(Experience thing in happenings)
+                {
+                Console.WriteLine($"happenings ******************************************* {thing.ExperienceName}");
+            };
+
+            Console.WriteLine(happenings);
             return View(thisLocation);
         }
 

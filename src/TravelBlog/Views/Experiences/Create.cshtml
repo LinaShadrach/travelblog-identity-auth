@@ -1,4 +1,5 @@
 ﻿@model TravelBlog.Models.Experience
+@using TravelBlog.Models
 
 
 <h2>Create</h2>
@@ -14,6 +15,9 @@
 
     @Html.LabelFor(model => model.ExperienceImage)
     @Html.TextBoxFor(model => model.ExperienceImage)
+
+    @Html.Label("LocationName")
+    @Html.DropDownList("MyList")
     <input type="submit" value="Add new experience" />
 }
 <p>@Html.ActionLink("Back to list", "Index")</p>

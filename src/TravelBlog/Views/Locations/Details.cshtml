@@ -1,4 +1,11 @@
 ﻿@model TravelBlog.Models.Location
+@using TravelBlog.Models
+
+
+
+
+
+
 
 <h2>Location details</h2>
 <hr />
@@ -8,5 +15,10 @@
 @Html.DisplayFor(model => model.LocationDescription)
 
     <p> Experiences:</p>
-    @Html.ListBox("Experience")
+@foreach(Experience thing in((List<Experience>)ViewBag.MyList))
+{
+    @thing.ExperienceName;
+}
+
+
 <p>@Html.ActionLink("Back to list", "Index")</p>
