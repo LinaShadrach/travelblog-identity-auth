@@ -9,20 +9,22 @@
 
 <h2>Create</h2>
 <hr />
-<h4>Add a new Experience</h4>
-@using (Html.BeginForm())
-{
-    @Html.LabelFor(model => model.ExperienceName)
-    @Html.TextBoxFor(model => model.ExperienceName)
+<div class="list-card">
+    <h4>Add a new Experience</h4>
+    @using (Html.BeginForm())
+    {
+        @Html.LabelFor(model => model.ExperienceName)
+        @Html.TextBoxFor(model => model.ExperienceName)
 
-    @Html.LabelFor(model => model.ExperienceDescription)
-    @Html.TextBoxFor(model => model.ExperienceDescription)
+        @Html.LabelFor(model => model.ExperienceDescription)
+        @Html.TextBoxFor(model => model.ExperienceDescription)
 
-    @Html.LabelFor(model => model.ExperienceImage)
-    @Html.TextBoxFor(model => model.ExperienceImage)
+        @Html.LabelFor(model => model.ExperienceImage)
+        @Html.TextBoxFor(model => model.ExperienceImage)
 
-    @Html.LabelFor(model => model.LocationId)
-    @Html.DropDownList("LocationId")
-    <input type="submit" value="Add new experience" />
-}
-<p>@Html.ActionLink("Back to list", "Index")</p>
+        @Html.LabelFor(model => model.LocationId)
+        @Html.DropDownList("LocationId")
+        <input type="submit" value="Add new experience" />
+    }
+    <p>@Html.ActionLink("Back to list", "Index")</p>
+</div>

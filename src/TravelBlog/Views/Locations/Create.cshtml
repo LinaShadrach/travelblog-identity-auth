@@ -8,6 +8,7 @@
 
     <h2>Create</h2>
     <hr />
+<div class="list-card">
     <h4>Add a new Adventure</h4>
     @using (Html.BeginForm())
     {
@@ -22,3 +23,4 @@
         <input type="submit" value="Add new adventure" />
     }
     <p>@Html.ActionLink("Back to list", "Index")</p>
+</div>

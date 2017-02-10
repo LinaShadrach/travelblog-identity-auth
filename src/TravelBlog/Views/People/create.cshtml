@@ -9,7 +9,8 @@
 
 <h2>Create</h2>
 <hr />
-<h4>Add a new Person you've met</h4>
+<div class="list-card"></div>
+<h3>Add a new Person you've met</h3>
 @using (Html.BeginForm())
 {
     @Html.LabelFor(model => model.PersonName)
@@ -29,3 +30,4 @@
     <input type="submit" value="Add new person" />
 }
 <p>@Html.ActionLink("Back to list", "Index")</p>
+</div>
