@@ -36,7 +36,7 @@ namespace TravelBlog
                 .AddDbContext<TravelBlogContext>(options =>
                     options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<TravelBlogContext>()
                 .AddDefaultTokenProviders();
         }
 
@@ -47,7 +47,7 @@ namespace TravelBlog
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Account}/{action=Index}/{id?}");
             });
 
             app.UseStaticFiles();
