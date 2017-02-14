@@ -25,6 +25,18 @@
                         @Html.ActionLink("People", "Index", "People")
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </li>
+                    <li class="nav-item">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <p>Hello @User.Identity.Name!</p>
+                            @*@Html.ActionLink("Sign out", "LogOff", "Account");*@
+
+                           @using (Html.BeginForm("LogOff", "Account"))
+                            {
+                                <input type="submit" class="btn btn-default" value="Log out" />
+                            }
+                        }
+                    </li>
                 </ul>
             </div>
         </nav>
