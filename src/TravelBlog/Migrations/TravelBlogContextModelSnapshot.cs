@@ -172,6 +172,26 @@ namespace TravelBlog.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("TravelBlog.Models.Comment", b =>
+                {
+                    b.Property<int>("CommentId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Body");
+
+                    b.Property<int>("LocationId");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("CommentId");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("TravelBlog.Models.Experience", b =>
                 {
                     b.Property<int>("ExperienceId")
@@ -281,6 +301,18 @@ namespace TravelBlog.Migrations
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TravelBlog.Models.Comment", b =>
+                {
+                    b.HasOne("TravelBlog.Models.Location", "Location")
+                        .WithMany("Comments")
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TravelBlog.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("TravelBlog.Models.Experience", b =>

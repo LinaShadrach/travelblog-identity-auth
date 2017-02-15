@@ -16,10 +16,18 @@
 @Html.DisplayFor(model => model.LocationDescription)
 
     <p> Experiences:</p>
-@foreach(Experience thing in((List<Experience>)ViewBag.MyList))
+@foreach(var experience in Model.Experiences)
 {
-    @thing.ExperienceName<br />;
+    @experience.ExperienceName<br />
 }
+
+@foreach (var comment in Model.Comments)
+{
+    @comment.Body<br />
+    @comment.User.UserName
+}
+
+<p>@Html.ActionLink("Add comment", "Create", "Comments", new { id = Model.LocationId})</p>
 
 
 <p>@Html.ActionLink("Back to list", "Index")</p>

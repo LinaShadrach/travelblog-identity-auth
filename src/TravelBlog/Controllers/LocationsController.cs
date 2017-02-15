@@ -37,16 +37,12 @@ namespace TravelBlog.Controllers
         {
             var thisLocation = db.Locations
                 .Include(locations => locations.Experiences)
+                .Include(locations => locations.Comments)
+                .ThenInclude(comments => comments.User)
                 .FirstOrDefault(locations => locations.LocationId == id);
             var happenings = thisLocation.Experiences.ToList();
        
             ViewBag.MyList =  happenings;
-            foreach(Experience thing in happenings)
-                {
-                Console.WriteLine($"happenings ******************************************* {thing.ExperienceName}");
-            };
-
-            Console.WriteLine(happenings);
             return View(thisLocation);
         }
 

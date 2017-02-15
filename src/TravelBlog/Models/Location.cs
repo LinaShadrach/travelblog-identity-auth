@@ -21,6 +21,7 @@ namespace TravelBlog.Models
         public string LocationImage { get; set; }
         public virtual ICollection<Person> People { get; set; }
         public virtual ICollection<Experience> Experiences { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
         public virtual ApplicationUser User { get; set; }
 
     }
