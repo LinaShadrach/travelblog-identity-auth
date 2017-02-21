@@ -8,16 +8,26 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
 
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace TravelBlog.Controllers
 {
     public class LocationsController : Controller
     {
-        private TravelBlogContext db = new TravelBlogContext();
-        public IActionResult Index()
+        private ILocationRepository locationRepo;
+        public LocationsController(ILocationRepository thisRepo = null)
         {
-            return View(db.Locations.ToList());
+            if (thisRepo == null)
+            {
+                this.locationRepo = new EFLocationRepository();
+            }
+            else
+            {
+                this.locationRepo = thisRepo;
+            }
+        }
+        public ViewResult Index()
+        {
+            return View(locationRepo.Locations.ToList());
         }
 
         public IActionResult Create()
@@ -28,14 +38,13 @@ namespace TravelBlog.Controllers
         [HttpPost]
         public IActionResult Create(Location location)
         {
-            db.Locations.Add(location);
-            db.SaveChanges();
+            locationRepo.Save(location);
             return RedirectToAction("Index");
         }
 
         public IActionResult Details(int id)
         {
-            var thisLocation = db.Locations
+            var thisLocation = locationRepo.Locations
                 .Include(locations => locations.Experiences)
                 .Include(locations => locations.Comments)
                 .ThenInclude(comments => comments.User)
@@ -48,30 +57,28 @@ namespace TravelBlog.Controllers
 
         public IActionResult Edit(int id)
         {
-            var thisLocation = db.Locations.FirstOrDefault(locations => locations.LocationId == id);
+            Location thisLocation = locationRepo.Locations.FirstOrDefault(locations => locations.LocationId == id);
             return View(thisLocation);
         }
 
         [HttpPost]
         public IActionResult Edit(Location location)
         {
-            db.Entry(location).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            db.SaveChanges();
+            locationRepo.Edit(location);
             return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
         {
-            var thisLocation = db.Locations.FirstOrDefault(locations => locations.LocationId == id);
+            var thisLocation = locationRepo.Locations.FirstOrDefault(locations => locations.LocationId == id);
             return View(thisLocation);
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            var thisLocation = db.Locations.FirstOrDefault(locations => locations.LocationId == id);
-            db.Locations.Remove(thisLocation);
-            db.SaveChanges();
+            var thisLocation = locationRepo.Locations.FirstOrDefault(locations => locations.LocationId == id);
+            locationRepo.Remove(thisLocation);
             return RedirectToAction("Index");
         }
     }

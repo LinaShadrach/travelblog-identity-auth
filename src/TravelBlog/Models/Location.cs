@@ -24,5 +24,22 @@ namespace TravelBlog.Models
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ApplicationUser User { get; set; }
 
+        public override bool Equals(System.Object otherLocation)
+        {
+            if (!(otherLocation is Location))
+            {
+                return false;
+            }
+            else
+            {
+                Location newLocation = (Location)otherLocation;
+                return this.LocationId.Equals(newLocation.LocationId);
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return this.LocationId.GetHashCode();
+        }
     }
 }
