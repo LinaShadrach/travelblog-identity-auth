@@ -26,12 +26,8 @@
         @Html.EditorFor(model => model.PersonImage)
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.LocationId)
-        @Html.DropDownList("LocationId")
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.ExperienceId)
-        @Html.DropDownList("ExperienceId")
+        <label>Experience</label>
+        @Html.DropDownList("Experience")
      </div>
     <input type="submit" value="Save" />
     }

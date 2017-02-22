@@ -21,15 +21,20 @@ namespace TravelBlog.Controllers
 
         public IActionResult Create()
         {
-            ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "LocationName");
-            ViewBag.ExperienceId = new SelectList(db.Experiences, "ExperienceId", "ExperienceName");
+            ViewBag.Experience = new SelectList(db.Experiences, "ExperienceId", "ExperienceName");
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Person person)
+        public IActionResult Create(Person person, int Experience = 0)
         {
             db.People.Add(person);
+            if(Experience == 0)
+            {
+                Encounter newEncounter = new Encounter(Experience, person.PersonId);
+                db.Encounters.Add(newEncounter);
+
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -37,8 +42,9 @@ namespace TravelBlog.Controllers
         public IActionResult Details(int id)
         {
             var thisPerson = db.People
-                .Include(people => people.Location)
-                .Include(people => people.Experience)
+                .Include(people => people.Encounters)
+                .ThenInclude(e => e.Experience)
+                .ThenInclude(e => e.Location)
                 .FirstOrDefault(people => people.PersonId == id);
             return View(thisPerson);
         }
@@ -46,7 +52,6 @@ namespace TravelBlog.Controllers
         public IActionResult Edit(int id)
         {
             var thisPerson = db.People.FirstOrDefault(person => person.PersonId == id) ;
-            ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "LocationName");
             ViewBag.ExperienceId = new SelectList(db.Experiences, "ExperienceId", "ExperienceName");
             return View(thisPerson);
         }
@@ -54,7 +59,7 @@ namespace TravelBlog.Controllers
         [HttpPost]
         public IActionResult Edit(Person person)
         {
-            db.Entry(person).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.Entry(person).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -18,6 +18,11 @@
     @Html.DisplayFor(model => model.ExperienceDescription)<br>
     At:
     @Html.DisplayFor(model => model.Location.LocationName)
+    With:
+    @foreach(var encounter in Model.Encounters)
+    {
+        @Html.DisplayFor(_ => encounter.Person)
+    }
 
     <p>@Html.ActionLink("Back to list", "Index")</p>
 </div>

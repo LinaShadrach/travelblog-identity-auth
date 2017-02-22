@@ -35,13 +35,18 @@ namespace TravelBlog
             services.AddEntityFramework()
                 .AddDbContext<TravelBlogContext>(options =>
                     options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(options => { options.Password.RequireUppercase = false; options.Password.RequireNonAlphanumeric = false; options.Password.RequiredLength = 0; options.Password.RequireDigit = false; })
                 .AddEntityFrameworkStores<TravelBlogContext>()
                 .AddDefaultTokenProviders();
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
             app.UseIdentity();
             app.UseMvc(routes =>
             {

@@ -11,8 +11,12 @@
     <img src="@Html.DisplayFor(model => model.PersonImage)" />
     <p>@Html.DisplayFor(model => model.PersonName) </p>
     <p>@Html.DisplayFor(model => model.PersonDescription)</p>
-    <p>At: @Html.DisplayFor(model => model.Location.LocationName)</p>
-    <p>Experience: @Html.DisplayFor(model => model.Experience.ExperienceName)</p>
-
+    <br />
+    <p>Interactions</p>
+    @foreach(var encounter in Model.Encounters)
+    {
+        <p>Experience: @Html.DisplayFor( _ => encounter.Experience.ExperienceName)</p>
+        <p>At: @Html.DisplayFor( _ => encounter.Experience.Location.LocationName)</p>
+    }
     <p>@Html.ActionLink("Back to list", "Index")</p>
 </div>

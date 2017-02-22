@@ -25,6 +25,14 @@
 
         @Html.LabelFor(model => model.LocationId)
         @Html.DropDownList("LocationId")
+
+        <label>Who did you have this experience with?</label>
+        <select name="PersonIds" multiple>
+            @foreach(var person in ViewBag.People)
+            {
+                <option value="@person.PersonId">@person.PersonName</option>
+            }
+        </select>
         <input type="submit" value="Add new experience" />
     }
     <p>@Html.ActionLink("Back to list", "Index")</p>

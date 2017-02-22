@@ -8,8 +8,8 @@ using TravelBlog.Models;
 namespace TravelBlog.Migrations
 {
     [DbContext(typeof(TravelBlogContext))]
-    [Migration("20170214215841_Initial")]
-    partial class Initial
+    [Migration("20170221180339_singularizeEncounterPeopleExperiences")]
+    partial class singularizeEncounterPeopleExperiences
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -193,6 +193,24 @@ namespace TravelBlog.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("TravelBlog.Models.Encounter", b =>
+                {
+                    b.Property<int>("EncounterId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ExperienceId");
+
+                    b.Property<int>("PersonId");
+
+                    b.HasKey("EncounterId");
+
+                    b.HasIndex("ExperienceId");
+
+                    b.HasIndex("PersonId");
+
+                    b.ToTable("Encounters");
+                });
+
             modelBuilder.Entity("TravelBlog.Models.Experience", b =>
                 {
                     b.Property<int>("ExperienceId")
@@ -222,19 +240,17 @@ namespace TravelBlog.Migrations
                     b.Property<int>("LocationId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("ApplicationUserId");
+
                     b.Property<string>("LocationDescription");
 
                     b.Property<string>("LocationImage");
 
                     b.Property<string>("LocationName");
 
-                    b.Property<int>("PersonId");
-
-                    b.Property<string>("UserId");
-
                     b.HasKey("LocationId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Locations");
                 });
@@ -243,10 +259,6 @@ namespace TravelBlog.Migrations
                 {
                     b.Property<int>("PersonId")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ExperienceId");
-
-                    b.Property<int>("LocationId");
 
                     b.Property<string>("PersonDescription");
 
@@ -258,13 +270,29 @@ namespace TravelBlog.Migrations
 
                     b.HasKey("PersonId");
 
-                    b.HasIndex("ExperienceId");
-
-                    b.HasIndex("LocationId");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("People");
+                });
+
+            modelBuilder.Entity("TravelBlog.Models.Suggestion", b =>
+                {
+                    b.Property<int>("SuggestionId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ApplicationUserId");
+
+                    b.Property<string>("Body");
+
+                    b.Property<int>("LocationId");
+
+                    b.HasKey("SuggestionId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("Suggestions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
@@ -316,6 +344,19 @@ namespace TravelBlog.Migrations
                         .HasForeignKey("UserId");
                 });
 
+            modelBuilder.Entity("TravelBlog.Models.Encounter", b =>
+                {
+                    b.HasOne("TravelBlog.Models.Experience", "Experience")
+                        .WithMany("Encounters")
+                        .HasForeignKey("ExperienceId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TravelBlog.Models.Person", "Person")
+                        .WithMany("Encounters")
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("TravelBlog.Models.Experience", b =>
                 {
                     b.HasOne("TravelBlog.Models.Location", "Location")
@@ -330,26 +371,28 @@ namespace TravelBlog.Migrations
 
             modelBuilder.Entity("TravelBlog.Models.Location", b =>
                 {
+                    b.HasOne("TravelBlog.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+                });
+
+            modelBuilder.Entity("TravelBlog.Models.Person", b =>
+                {
                     b.HasOne("TravelBlog.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("TravelBlog.Models.Person", b =>
+            modelBuilder.Entity("TravelBlog.Models.Suggestion", b =>
                 {
-                    b.HasOne("TravelBlog.Models.Experience", "Experience")
-                        .WithMany("People")
-                        .HasForeignKey("ExperienceId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("TravelBlog.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("TravelBlog.Models.Location", "Location")
-                        .WithMany("People")
+                        .WithMany()
                         .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("TravelBlog.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
         }
     }

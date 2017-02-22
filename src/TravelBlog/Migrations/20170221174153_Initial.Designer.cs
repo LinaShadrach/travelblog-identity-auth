@@ -8,9 +8,10 @@ using TravelBlog.Models;
 namespace TravelBlog.Migrations
 {
     [DbContext(typeof(TravelBlogContext))]
-    partial class TravelBlogContextModelSnapshot : ModelSnapshot
+    [Migration("20170221174153_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -345,12 +346,12 @@ namespace TravelBlog.Migrations
 
             modelBuilder.Entity("TravelBlog.Models.Encounter", b =>
                 {
-                    b.HasOne("TravelBlog.Models.Experience", "Experience")
+                    b.HasOne("TravelBlog.Models.Experience", "Experiences")
                         .WithMany("Encounters")
                         .HasForeignKey("ExperienceId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("TravelBlog.Models.Person", "Person")
+                    b.HasOne("TravelBlog.Models.Person", "People")
                         .WithMany("Encounters")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade);

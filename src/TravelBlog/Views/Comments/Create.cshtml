@@ -1,19 +1,14 @@
-﻿@model TravelBlog.Models.Comment
-@using TravelBlog.Models
+﻿@using TravelBlog.Models
+@model TravelBlog.Models.Comment
 
-@{
-    ViewData["Title"] = "Travel Blog";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-@using (Html.BeginForm())
-{
-   <input type="hidden" value="@ViewBag.LocationId" name="locationId" />
-    <p>@ViewBag.LocationId</p> 
+<form id="newComment">
+    <input type="hidden" value="@ViewBag.LocationId" name="locationId" />
 
-    @Html.LabelFor(model => model.Body)
-    @Html.TextBoxFor(model => model.Body)
+    <label asp-for="Body">Comment: </label>
+    <input  asp-for="Body"/>
 
-    @Html.LabelFor(model => model.User.UserName)
-    @Html.TextBoxFor(model => model.User.UserName)
-    <input type="submit" value="Add comment" />
-}
+    <label for="UserEmail">Email: </label>
+    <input type="text" id="UserEmail" name="UserEmail"/>
+
+    <button id="add" type="submit">Add</button>
+</form>

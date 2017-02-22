@@ -1,5 +1,5 @@
-﻿@model TravelBlog.Models.Person
-@using TravelBlog.Models
+﻿@using TravelBlog.Models
+@model TravelBlog.Models.Person
 
 @{
     ViewData["Title"] = "Travel Blog";
@@ -22,12 +22,12 @@
     @Html.LabelFor(model => model.PersonImage)
     @Html.EditorFor(model => model.PersonImage)
 
-    @Html.LabelFor(model => model.LocationId)
-    @Html.DropDownList("LocationId")
-
-    @Html.LabelFor(model => model.ExperienceId)
-    @Html.DropDownList("ExperienceId")
+    @if(ViewBag.Experience.Count() != 0)
+    {
+        <label for="Experience">Experience</label>
+        @Html.DropDownList("Experience")
+    }
     <input type="submit" value="Add new person" />
 }
 <p>@Html.ActionLink("Back to list", "Index")</p>
-</div>
+

@@ -19,6 +19,7 @@
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
           "Microsoft.AspNetCore.Mvc": "1.0.1",
+          "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.1",
           "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
           "Microsoft.AspNetCore.Server.Kestrel": "1.0.1",
           "Microsoft.AspNetCore.StaticFiles": "1.0.0",
@@ -2742,6 +2743,7 @@
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
           "Microsoft.AspNetCore.Mvc": "1.0.1",
+          "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.1",
           "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
           "Microsoft.AspNetCore.Server.Kestrel": "1.0.1",
           "Microsoft.AspNetCore.StaticFiles": "1.0.0",
@@ -5776,7 +5778,7 @@
     "Microsoft.NETCore.App/1.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-X/yK8TRGE0KVgDz8/Wt1fElsZ0S8wmpRqDwBkOjtUZZS/cCkZ9327/JNA4CowoTXwetPGWYy/zCWUQGKuQ7Icg=="
+      "sha512": "sha512-M3iH7u95LntTkJtI/DqN/96MRlb8Wa0SjnXldxHA4FjlvEqghOhwK087bDZAZaTN9C4YHckvaYH3ka9eYWZZZw=="
     },
     "Microsoft.NETCore.DotNetHost/1.0.1": {
       "type": "package",
@@ -5796,7 +5798,7 @@
     "Microsoft.NETCore.Jit/1.0.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-wxjrxvjepn6toKsmrav3iy32bbaEksin4Avg/Ta91yCSVKd3T/z52f0ALlJN+wbpcmLQoYPl/qdQfmruomOPZw=="
+      "sha512": "sha512-IcHTGj+vTFcOu7/flwNg+CWIfTsxqHWgj08MKOtYwS5k0EuLvx6PrYsn7vHCV0SUTk1zbQ1l0EJj1UdxTMyx4w=="
     },
     "Microsoft.NETCore.Platforms/1.0.1": {
       "type": "package",
@@ -5806,7 +5808,7 @@
     "Microsoft.NETCore.Runtime.CoreCLR/1.0.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-tXndt0e1U06ZREOqX84rxWRaysFN/KRAQOFtlLPh3gH2lFY6AplSefd6nvjPZjeNVMM1vuOD9cQ/VaCcXhcIaA=="
+      "sha512": "sha512-r4/aP7VYcJ+W/rJVFU+jAdjF4KrsHRDYQJ+p8weUP5n65yLzWXlQTVY6OsR560aV5EF7jc65dqsNXIryUCrEkQ=="
     },
     "Microsoft.NETCore.Targets/1.0.1": {
       "type": "package",

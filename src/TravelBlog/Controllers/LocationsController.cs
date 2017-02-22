@@ -50,7 +50,6 @@ namespace TravelBlog.Controllers
                 .ThenInclude(comments => comments.User)
                 .FirstOrDefault(locations => locations.LocationId == id);
             var happenings = thisLocation.Experiences.ToList();
-       
             ViewBag.MyList =  happenings;
             return View(thisLocation);
         }

@@ -16,7 +16,9 @@ namespace TravelBlog.Models
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Experience> Experiences { get; set; }
         public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<Encounter> Encounters { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<Suggestion> Suggestions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {

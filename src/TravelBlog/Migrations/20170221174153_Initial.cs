@@ -154,17 +154,38 @@ namespace TravelBlog.Migrations
                 {
                     LocationId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ApplicationUserId = table.Column<string>(nullable: true),
                     LocationDescription = table.Column<string>(nullable: true),
                     LocationImage = table.Column<string>(nullable: true),
-                    LocationName = table.Column<string>(nullable: true),
-                    PersonId = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true)
+                    LocationName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Locations", x => x.LocationId);
                     table.ForeignKey(
-                        name: "FK_Locations_AspNetUsers_UserId",
+                        name: "FK_Locations_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "People",
+                columns: table => new
+                {
+                    PersonId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    PersonDescription = table.Column<string>(nullable: true),
+                    PersonImage = table.Column<string>(nullable: true),
+                    PersonName = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_People", x => x.PersonId);
+                    table.ForeignKey(
+                        name: "FK_People_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -228,39 +249,56 @@ namespace TravelBlog.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "People",
+                name: "Suggestions",
                 columns: table => new
                 {
-                    PersonId = table.Column<int>(nullable: false)
+                    SuggestionId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ExperienceId = table.Column<int>(nullable: false),
-                    LocationId = table.Column<int>(nullable: false),
-                    PersonDescription = table.Column<string>(nullable: true),
-                    PersonImage = table.Column<string>(nullable: true),
-                    PersonName = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true)
+                    ApplicationUserId = table.Column<string>(nullable: true),
+                    Body = table.Column<string>(nullable: true),
+                    LocationId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_People", x => x.PersonId);
+                    table.PrimaryKey("PK_Suggestions", x => x.SuggestionId);
                     table.ForeignKey(
-                        name: "FK_People_Experiences_ExperienceId",
+                        name: "FK_Suggestions_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Suggestions_Locations_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Locations",
+                        principalColumn: "LocationId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Encounters",
+                columns: table => new
+                {
+                    EncounterId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ExperienceId = table.Column<int>(nullable: false),
+                    PersonId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Encounters", x => x.EncounterId);
+                    table.ForeignKey(
+                        name: "FK_Encounters_Experiences_ExperienceId",
                         column: x => x.ExperienceId,
                         principalTable: "Experiences",
                         principalColumn: "ExperienceId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_People_Locations_LocationId",
-                        column: x => x.LocationId,
-                        principalTable: "Locations",
-                        principalColumn: "LocationId",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_People_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        name: "FK_Encounters_People_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "People",
+                        principalColumn: "PersonId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -315,6 +353,16 @@ namespace TravelBlog.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Encounters_ExperienceId",
+                table: "Encounters",
+                column: "ExperienceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Encounters_PersonId",
+                table: "Encounters",
+                column: "PersonId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Experiences_LocationId",
                 table: "Experiences",
                 column: "LocationId");
@@ -325,24 +373,24 @@ namespace TravelBlog.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Locations_UserId",
+                name: "IX_Locations_ApplicationUserId",
                 table: "Locations",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_People_ExperienceId",
-                table: "People",
-                column: "ExperienceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_People_LocationId",
-                table: "People",
-                column: "LocationId");
+                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_People_UserId",
                 table: "People",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Suggestions_ApplicationUserId",
+                table: "Suggestions",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Suggestions_LocationId",
+                table: "Suggestions",
+                column: "LocationId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -366,13 +414,19 @@ namespace TravelBlog.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "People");
+                name: "Encounters");
+
+            migrationBuilder.DropTable(
+                name: "Suggestions");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Experiences");
+
+            migrationBuilder.DropTable(
+                name: "People");
 
             migrationBuilder.DropTable(
                 name: "Locations");

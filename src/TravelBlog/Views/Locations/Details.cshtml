@@ -15,19 +15,28 @@
 @Html.DisplayFor(model => model.LocationName)<br />
 @Html.DisplayFor(model => model.LocationDescription)
 
-    <p> Experiences:</p>
-@foreach(var experience in Model.Experiences)
-{
-    @experience.ExperienceName<br />
-}
+    <h4>Experiences:</h4>
+    @foreach(var experience in Model.Experiences)
+    {
+        @experience.ExperienceName<br />
+    }
+    @if (Model.Comments.Count > 0)
+    {
+        <h4>Comments:</h4>
+        <div id="commentList">
+            @foreach(var comment in Model.Comments)
+            {
 
-@foreach (var comment in Model.Comments)
-{
-    @comment.Body<br />
-    @comment.User.UserName
-}
-
-<p>@Html.ActionLink("Add comment", "Create", "Comments", new { id = Model.LocationId})</p>
+                <p>@comment.Body by @comment.User.UserName</p>
+            }
+        </div>
+    }
+<form id="addComment" action="Comments/Create">
+    <input type="hidden" value="@Model.LocationId" id="locationId"/>
+    <button type="submit">Add comment</button>
+</form>
+<div id="commentForm">
+</div>
 
 
 <p>@Html.ActionLink("Back to list", "Index")</p>
